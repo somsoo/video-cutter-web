@@ -178,7 +178,7 @@
                         <input type="range" id="endRange" min="0" max="100" value="0" step="0.1" class="w-full accent-red-600" aria-label="종료 시간">
                     </div>
 
-                    <button id="trimBtn" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold text-sm rounded-xl shadow-md transition flex items-center justify-center gap-2" aria-label="구간 자르기">
+                    <button id="trimBtn" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold text-sm rounded-xl shadow-md transition flex items-center justify-center gap-2 whitespace-nowrap" aria-label="구간 자르기">
                         <i class="fa-solid fa-scissors"></i><span>구간 자르고 다운로드</span>
                     </button>
                 </div>
@@ -202,7 +202,14 @@
                 </div>
             </section>
         </div>
-    </main>
+    
+      <div class="mt-4 text-center">
+        <button id="masterCopyBtn" onclick="copyMasterResult()" class="whitespace-nowrap w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm mx-auto whitespace-nowrap">
+          <span>📋 결과 복사하기</span>
+        </button>
+      </div>
+
+  </main>
 
     <!-- Toast -->
     <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xl z-50 transition-opacity duration-300 opacity-0 pointer-events-none flex items-center gap-2">
@@ -240,7 +247,20 @@
 
         <div class="space-y-3">
           <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2"><span>❓</span> 자주 묻는 질문 (FAQ)</h4>
-          <details class="group border border-slate-200 rounded-xl p-4">
+          
+    <!-- 심층 가이드북 바로가기 (4-1-4 헌법 준수) -->
+    <div class="mt-8 mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span class="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full mb-2">2026 실무 가이드</span>
+        <h3 class="text-lg font-bold text-gray-900">공식 기준과 상세 산식이 궁금하신가요?</h3>
+        <p class="text-xs text-gray-600 mt-1">워터마크 없는 비디오 컷편집기의 최신 법정 고시, 감면 혜택, 실무 체크리스트를 확인해보세요.</p>
+      </div>
+      <a href="/guides/guide.html" class="whitespace-nowrap px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition flex items-center gap-2 text-xs shrink-0">
+        심층 가이드북 읽기 &rarr;
+      </a>
+    </div>
+
+    <details class="group border border-slate-200 rounded-xl p-4">
             <summary class="flex items-center justify-between cursor-pointer font-bold text-sm text-slate-800">
               <span>Q. 동영상 파일이 외부 웹 서버로 업로드되나요?</span>
               <span class="transition group-open:rotate-180 text-slate-400 text-xs">▼</span>
@@ -401,5 +421,39 @@
             a.click();
         });
     </script>
+
+  <!-- 원클릭 복사 & 토스트 스크립트 (4-4 헌법 준수) -->
+  <div id="masterToast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-3 px-6 rounded-full shadow-2xl transition opacity-0 pointer-events-none z-50">
+    클립보드에 복사되었습니다!
+  </div>
+  <script>
+    function copyMasterResult() {
+      var resEl = document.getElementById('result') || document.getElementById('resultCard') || document.querySelector('.result-box') || document.querySelector('main');
+      var text = resEl ? (resEl.innerText || resEl.textContent) : '워터마크 없는 비디오 컷편집기 계산 결과';
+      var shareText = text.trim() + "\n\n👉 워터마크 없는 비디오 컷편집기 바로가기: " + window.location.href;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText).then(showMasterToast);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = shareText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showMasterToast();
+      }
+    }
+    function showMasterToast() {
+      var t = document.getElementById('masterToast');
+      if (!t) return;
+      t.classList.remove('opacity-0', 'pointer-events-none');
+      t.classList.add('opacity-100');
+      setTimeout(function() {
+        t.classList.remove('opacity-100');
+        t.classList.add('opacity-0', 'pointer-events-none');
+      }, 2200);
+    }
+  </script>
+
 </body>
 </html>
