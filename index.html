@@ -409,16 +409,98 @@
         startRange.addEventListener('input', updateTimes);
         endRange.addEventListener('input', updateTimes);
 
-        document.getElementById('trimBtn').addEventListener('click', () => {
+        let isRecording = false;
+        document.getElementById('trimBtn').addEventListener('click', async () => {
+            if (isRecording) return;
             const start = parseFloat(startRange.value);
             const end = parseFloat(endRange.value);
-            showToast(`[${start.toFixed(1)}초 ~ ${end.toFixed(1)}초] 클립 추출을 완료했습니다!`);
-            
-            // Mock native download of trimmed metadata
-            const a = document.createElement('a');
-            a.href = videoPlayer.src;
-            a.download = `${originalFileName}_cut_${start.toFixed(0)}s_${end.toFixed(0)}s.mp4`;
-            a.click();
+            const duration = end - start;
+            if (duration <= 0) {
+                showToast("종료 시간은 시작 시간보다 커야 합니다.");
+                return;
+            }
+
+            const trimBtn = document.getElementById('trimBtn');
+            const originalBtnText = trimBtn.innerHTML;
+            trimBtn.disabled = true;
+            trimBtn.innerHTML = `<span>⏳ 클립 인코딩 중... (<span id="renderProg">0</span>%)</span>`;
+            isRecording = true;
+
+            try {
+                videoPlayer.currentTime = start;
+                await new Promise(r => videoPlayer.onseeked = r);
+
+                let stream;
+                if (videoPlayer.captureStream) {
+                    stream = videoPlayer.captureStream();
+                } else if (videoPlayer.mozCaptureStream) {
+                    stream = videoPlayer.mozCaptureStream();
+                } else {
+                    throw new Error("브라우저가 captureStream API를 지원하지 않습니다.");
+                }
+
+                let mimeType = 'video/webm;codecs=vp9,opus';
+                if (!MediaRecorder.isTypeSupported(mimeType)) {
+                    mimeType = 'video/webm';
+                    if (!MediaRecorder.isTypeSupported(mimeType)) {
+                        mimeType = 'video/mp4';
+                    }
+                }
+
+                const chunks = [];
+                const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+
+                recorder.ondataavailable = (e) => {
+                    if (e.data && e.data.size > 0) chunks.push(e.data);
+                };
+
+                recorder.onstop = () => {
+                    const ext = mimeType.includes('mp4') ? 'mp4' : 'webm';
+                    const blob = new Blob(chunks, { type: mimeType || 'video/webm' });
+                    const blobUrl = URL.createObjectURL(blob);
+                    
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = `${originalFileName}_trimmed_${start.toFixed(0)}s_to_${end.toFixed(0)}s.${ext}`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
+                    setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+                    trimBtn.disabled = false;
+                    trimBtn.innerHTML = originalBtnText;
+                    isRecording = false;
+                    videoPlayer.pause();
+                    showToast(`✓ [${start.toFixed(1)}초 ~ ${end.toFixed(1)}초] 클립 추출 및 다운로드 완료!`);
+                };
+
+                recorder.start(100);
+                videoPlayer.play();
+
+                const checkInterval = setInterval(() => {
+                    if (!isRecording) {
+                        clearInterval(checkInterval);
+                        return;
+                    }
+                    const cur = videoPlayer.currentTime;
+                    const prog = Math.min(100, Math.round(((cur - start) / duration) * 100));
+                    const progEl = document.getElementById('renderProg');
+                    if (progEl) progEl.innerText = prog;
+
+                    if (cur >= end || videoPlayer.ended) {
+                        clearInterval(checkInterval);
+                        videoPlayer.pause();
+                        recorder.stop();
+                    }
+                }, 50);
+
+            } catch (err) {
+                console.error(err);
+                trimBtn.disabled = false;
+                trimBtn.innerHTML = originalBtnText;
+                isRecording = false;
+                showToast("인코딩 오류: " + err.message);
+            }
         });
     </script>
 
