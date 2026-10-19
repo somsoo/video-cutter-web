@@ -384,7 +384,7 @@ class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; mar
             const toast = document.getElementById('toastNotification');
             const toastMsg = document.getElementById('toastMessage');
             if (toast && toastMsg) {
-                toastMsg.innerText = msg;
+                toastMsg.textContent = msg;
                 toast.classList.remove('opacity-0', 'pointer-events-none');
                 setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2200);
             }
@@ -409,7 +409,7 @@ class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; mar
                 endRange.value = Math.min(60, videoDuration);
 
                 updateTimes();
-                videoMetaText.innerText = `해상도: ${videoPlayer.videoWidth}x${videoPlayer.videoHeight} | 전체 길이: ${videoDuration.toFixed(1)}초`;
+                videoMetaText.textContent = `해상도: ${videoPlayer.videoWidth}x${videoPlayer.videoHeight} | 전체 길이: ${videoDuration.toFixed(1)}초`;
                 showToast("동영상이 준비되었습니다. 구간을 설정하세요!");
             };
         });
@@ -423,10 +423,10 @@ class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; mar
                 startRange.value = start;
             }
 
-            startTimeVal.innerText = `${start.toFixed(1)}초`;
-            endTimeVal.innerText = `${end.toFixed(1)}초`;
+            startTimeVal.textContent = `${start.toFixed(1)}초`;
+            endTimeVal.textContent = `${end.toFixed(1)}초`;
             const dur = (end - start).toFixed(1);
-            clipDurationText.innerText = `${dur}초`;
+            clipDurationText.textContent = `${dur}초`;
 
             videoPlayer.currentTime = start;
         }
@@ -510,7 +510,7 @@ class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; mar
                     const cur = videoPlayer.currentTime;
                     const prog = Math.min(100, Math.round(((cur - start) / duration) * 100));
                     const progEl = document.getElementById('renderProg');
-                    if (progEl) progEl.innerText = prog;
+                    if (progEl) progEl.textContent = prog;
 
                     if (cur >= end || videoPlayer.ended) {
                         clearInterval(checkInterval);
