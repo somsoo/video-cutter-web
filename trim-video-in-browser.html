@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>동영상 자르기 | 설치 없이 브라우저에서 구간 자르기</title>
+<meta name="description" content="브라우저에서 동영상의 시작·끝 시각을 정해 그 구간만 새 파일로 저장하는 방법입니다. 이 도구가 잘라 내는 원리, 저장되는 파일 형식, 걸리는 시간과 화질, 잘 안 될 때 확인할 점을 정리했습니다."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://video-cut.enjoy-onepage.com/trim-video-in-browser.html"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:url" content="https://video-cut.enjoy-onepage.com/trim-video-in-browser.html"/>
+<meta property="og:site_name" content="동영상 컷편집기"/>
+<meta property="og:title" content="동영상 자르기 | 설치 없이 브라우저에서 구간 자르기"/>
+<meta property="og:description" content="브라우저에서 동영상의 시작·끝 시각을 정해 그 구간만 새 파일로 저장하는 방법입니다. 이 도구가 잘라 내는 원리, 저장되는 파일 형식, 걸리는 시간과 화질, 잘 안 될 때 확인할 점을 정리했습니다."/>
+<meta property="og:image" content="https://video-cut.enjoy-onepage.com/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="/favicon.ico"/>
+<script async crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106"></script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "동영상 자르기: 프로그램 설치 없이 필요한 구간만", "description": "브라우저에서 동영상의 시작·끝 시각을 정해 그 구간만 새 파일로 저장하는 방법입니다. 이 도구가 잘라 내는 원리, 저장되는 파일 형식, 걸리는 시간과 화질, 잘 안 될 때 확인할 점을 정리했습니다.", "inLanguage": "ko-KR", "dateModified": "2026-10-30", "datePublished": "2026-10-30", "mainEntityOfPage": "https://video-cut.enjoy-onepage.com/trim-video-in-browser.html", "author": {"@type": "Organization", "name": "Enjoy OnePage", "url": "https://enjoy-onepage.com/"}, "publisher": {"@type": "Organization", "name": "Enjoy OnePage", "url": "https://enjoy-onepage.com/"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "워터마크가 생기나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 결과 파일에 워터마크를 넣지 않습니다."}}, {"@type": "Question", "name": "영상이 업로드되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 파일은 이 기기의 브라우저 안에서만 재생·녹화됩니다."}}, {"@type": "Question", "name": "여러 구간을 이어 붙일 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "지금은 한 번에 한 구간만 자를 수 있습니다."}}]}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "동영상 컷편집기", "item": "https://video-cut.enjoy-onepage.com/"}, {"@type": "ListItem", "position": 2, "name": "동영상 자르기: 프로그램 설치 없이 필요한 구간만", "item": "https://video-cut.enjoy-onepage.com/trim-video-in-browser.html"}]}]</script>
+<style>:root{--a:#0f172a}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#1e293b;background:#f8fafc;line-height:1.75;word-break:keep-all;overflow-wrap:break-word}
+header{background:#fff;border-bottom:1px solid #e2e8f0}header .in{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+header a{color:var(--a);font-weight:800;text-decoration:none}main{max-width:760px;margin:0 auto;padding:16px}
+.crumb{font-size:13px;color:#64748b;margin:4px 0 8px}.crumb a{color:#64748b}h1{font-size:1.55rem;line-height:1.4;margin:.3em 0 .6em}
+h2{font-size:1.2rem;margin:1.8em 0 .5em;padding-left:10px;border-left:4px solid var(--a)}p,li{font-size:16px}
+.sum{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px 18px}.sum ul{margin:0;padding-left:1.1em}.sum li{margin:.3em 0}
+table{width:100%;border-collapse:collapse;background:#fff;margin:.8em 0;font-size:15px}th,td{border:1px solid #e2e8f0;padding:8px 10px;text-align:left}th{background:#f1f5f9}
+.tw{overflow-x:auto}.note{font-size:14px;color:#64748b}.cta{display:block;text-align:center;background:var(--a);color:#fff;font-weight:800;padding:14px;border-radius:12px;text-decoration:none;margin:24px 0}
+.faq details{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;margin:8px 0}.faq summary{font-weight:700;cursor:pointer}
+.src{font-size:14px;color:#475569}.rel a{display:block;padding:10px 12px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0;color:#1e293b;text-decoration:none;font-weight:600}
+.ad{margin:16px auto;text-align:center;overflow:hidden;max-width:100%}footer{text-align:center;font-size:13px;color:#64748b;padding:24px 16px;border-top:1px solid #e2e8f0;background:#fff;margin-top:32px}footer a{color:#64748b;margin:0 6px}</style>
+</head>
+<body>
+<header><div class="in"><a href="/">동영상 컷편집기</a><a href="/" style="font-size:14px">계산기 열기 →</a></div></header>
+<div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3824727725" data-ad-format="horizontal" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+<main>
+<div class="crumb"><a href="/">동영상 컷편집기</a> › 안내</div>
+<h1>동영상 자르기: 프로그램 설치 없이 필요한 구간만</h1>
+<p class="note">확인일: 2026년 10월 30일 · 아래 출처의 법령과 공식 발표를 기준으로 작성했습니다.</p>
+<div class="sum"><ul><li>시작·끝 시각을 정하고 <b>구간 자르고 다운로드</b>를 누르면 그 부분만 저장됩니다.</li><li>영상을 재생하면서 녹화하는 방식이라 <b>자르는 구간 길이만큼 시간이 걸립니다</b>(30초 구간이면 약 30초).</li><li>저장 형식은 브라우저에 따라 <b>WebM</b>(크롬·엣지) 또는 <b>MP4</b>입니다.</li><li>파일은 서버로 올라가지 않습니다.</li></ul></div>
+
+<h2>자르는 순서</h2>
+<ol><li>동영상 파일(MP4, WebM, MOV)을 고르거나 끌어다 놓습니다.</li>
+<li>플레이어에서 위치를 확인하며 시작 시각과 종료 시각을 정합니다.</li>
+<li><b>구간 자르고 다운로드</b>를 누릅니다. 녹화가 끝나면 파일이 저장됩니다. 그동안 탭을 닫거나 다른 탭으로 오래 옮기지 마세요.</li></ol>
+<h2>이 도구가 자르는 원리</h2>
+<p>원본 파일을 직접 쪼개는 대신, 브라우저가 지정 구간을 재생하는 화면과 소리를 녹화(MediaRecorder)해서 새 파일을 만듭니다. 그래서 다음과 같은 특징이 있습니다.</p>
+<ul><li><b>시간:</b> 구간 길이만큼 걸립니다. 긴 구간을 자를 때는 기다려야 합니다.</li>
+<li><b>화질:</b> 다시 압축하므로 원본보다 조금 떨어질 수 있고, 파일 크기도 원본 비율과 다를 수 있습니다.</li>
+<li><b>형식:</b> 크롬·엣지에서는 보통 WebM으로, 사파리 등에서는 MP4로 저장됩니다. WebM을 꼭 MP4로 써야 하는 곳이라면 변환 도구를 한 번 더 거쳐야 합니다.</li></ul>
+<h2>쇼츠·릴스용으로 자를 때</h2>
+<ul><li>올릴 서비스의 최대 길이를 먼저 확인하세요. 서비스마다 다르고 자주 바뀝니다.</li>
+<li>세로 9:16 영상이 아니라면 업로드할 때 여백이 생깁니다. 이 도구는 길이만 자르고 화면 비율은 바꾸지 않습니다.</li></ul>
+<h2>잘 안 될 때</h2>
+<ul><li><b>파일이 안 열림:</b> 브라우저가 재생할 수 없는 코덱(예: 일부 HEVC/H.265 영상)은 열리지 않을 수 있습니다. 다른 브라우저를 써 보세요.</li>
+<li><b>소리가 없음:</b> 원본에 소리가 있는데 결과에 없다면 브라우저를 최신으로 업데이트한 뒤 다시 시도하세요.</li>
+<li><b>휴대폰에서 멈춤:</b> 큰 파일은 PC에서 작업하는 편이 안정적입니다.</li></ul>
+
+<a class="cta" href="/">동영상 구간 자르기 →</a>
+<h2>자주 묻는 질문</h2>
+<div class="faq"><details><summary>워터마크가 생기나요?</summary><p>아니요. 결과 파일에 워터마크를 넣지 않습니다.</p></details><details><summary>영상이 업로드되나요?</summary><p>아니요. 파일은 이 기기의 브라우저 안에서만 재생·녹화됩니다.</p></details><details><summary>여러 구간을 이어 붙일 수 있나요?</summary><p>지금은 한 번에 한 구간만 자를 수 있습니다.</p></details></div>
+<h2>출처</h2>
+<ul class="src"><li><a href="https://developer.mozilla.org/ko/docs/Web/API/MediaRecorder" rel="nofollow noopener" target="_blank">MDN: MediaRecorder</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/captureStream" rel="nofollow noopener" target="_blank">MDN: HTMLMediaElement.captureStream()</a></li></ul>
+<p class="note">이 페이지는 일반적인 안내이며 법률·세무 자문이 아닙니다. 개인 사정에 따라 결과가 다를 수 있으니 중요한 결정 전에는 담당 기관에 확인하세요.</p>
+<h2>함께 보면 좋은 안내</h2>
+<div class="rel"><a href="/">동영상 컷편집기 →</a></div>
+</main>
+<div class="ad" style="min-height:280px"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3416334507" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+<footer><a href="/">동영상 컷편집기</a><a href="/privacy.html">개인정보처리방침</a><a href="https://enjoy-onepage.com/">Enjoy OnePage 전체 도구</a></footer>
+</body>
+</html>
