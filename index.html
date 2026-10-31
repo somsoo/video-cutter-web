@@ -8,17 +8,17 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>동영상 컷편집기 | 워터마크 없는 비디오 구간 자르기</title>
-    <meta content="서버 업로드 없이 브라우저에서 동영상 구간을 빠르게 자르고 워터마크 없이 저장합니다." name="description"/>
+    <meta content="서버 업로드 없이 브라우저에서 동영상 구간을 잘라 워터마크 없이 저장합니다." name="description"/>
     <link href="https://video-cut.enjoy-onepage.com/" rel="canonical"/>
     <meta content="website" property="og:type"/>
     <meta property="og:locale" content="ko_KR">
     <meta content="https://video-cut.enjoy-onepage.com/" property="og:url"/>
     <meta content="동영상 컷편집기 | 워터마크 없는 비디오 구간 자르기" property="og:title"/>
-    <meta content="서버 업로드 없이 브라우저에서 동영상 구간을 빠르게 자르고 워터마크 없이 저장합니다." property="og:description"/>
+    <meta content="서버 업로드 없이 브라우저에서 동영상 구간을 잘라 워터마크 없이 저장합니다." property="og:description"/>
     <meta content="https://video-cut.enjoy-onepage.com/og-image.png" property="og:image"/>
     <meta content="summary_large_image" name="twitter:card"/>
     <meta content="동영상 컷편집기 | 워터마크 없는 비디오 구간 자르기" name="twitter:title"/>
-    <meta content="서버 업로드 없이 브라우저에서 동영상 구간을 빠르게 자르고 워터마크 없이 저장합니다." name="twitter:description"/>
+    <meta content="서버 업로드 없이 브라우저에서 동영상 구간을 잘라 워터마크 없이 저장합니다." name="twitter:description"/>
     <meta content="https://video-cut.enjoy-onepage.com/og-image.png" name="twitter:image"/>
     <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
 
@@ -51,7 +51,7 @@
               "name": "동영상 파일이 외부 웹 서버로 업로드되나요?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "아닙니다. HTML5 File API 및 Canvas 비디오 프레임 추출 기술을 통해 영상 파일이 사용자의 컴퓨터/스마트폰 메모리 내에서만 로컬 연산되므로 100% 안전합니다."
+                "text": "아니요. 고른 파일은 이 브라우저 안에서 재생하면서 지정한 구간을 녹화(MediaRecorder)해 새 파일을 만들 뿐, 서버로 올리지 않습니다."
               }
             },
             {
@@ -59,7 +59,7 @@
               "name": "자른 동영상에 워터마크(로고)가 강제로 붙나요?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "붙지 않습니다. CapCut이나 기성 무료 편집 앱과 달리 워터마크가 전혀 삽입되지 않은 원본 그대로의 깔끔한 클립을 무료로 추출할 수 있습니다."
+                "text": "붙지 않습니다. 다만 구간을 다시 녹화해 만드는 방식이라 화질과 파일 형식(보통 WebM)은 원본과 다를 수 있습니다."
               }
             },
             {
@@ -67,7 +67,7 @@
               "name": "유튜브 쇼츠나 인스타그램 릴스 길이에 맞춰 자를 수 있나요?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "네, 시작 시간과 종료 시간을 초 단위로 정밀하게 슬라이더로 조절하여 15초, 30초, 60초 등 숏폼 규격에 딱 맞춰 자를 수 있습니다."
+                "text": "네. 시작·종료 슬라이더를 0.1초 단위로 움직여 길이를 맞출 수 있습니다. 서비스마다 최대 길이가 다르고 자주 바뀌니 올리기 전에 확인하세요. 화면 비율은 바꾸지 않습니다."
               }
             }
           ]
@@ -146,7 +146,7 @@
         <div class="border-b border-slate-200 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 mb-2">
-                    <i class="fa-solid fa-bolt text-red-600"></i><span>100% 브라우저 로컬 비디오 인스턴트 트리머</span>
+                    <i class="fa-solid fa-bolt text-red-600"></i><span>100% 브라우저 로컬 비디오 트리머</span>
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                     워터마크 없는 비디오 컷편집기
@@ -239,44 +239,33 @@
       <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
         <div class="border-b border-slate-200 pb-4">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 mb-2">
-            <span>⚖️ 2026년 W3C WebCodecs 및 HTML5 미디어 표준</span>
+            <span>🎬 작동 방식 안내</span>
           </div>
           <h3 class="text-xl font-black text-slate-900 tracking-tight">
-            브라우저 로컬 비디오 트리밍 원리 및 숏폼 규격 가이드
+            브라우저에서 동영상 구간을 자르는 원리
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 mt-1">
-            본 도구는 HTML5 Media Source Extensions 및 Canvas 하드웨어 가속 비디오 렌더링 표준을 준수합니다.
+            이 편집기는 고른 구간을 브라우저가 재생하는 동안 화면과 소리를 녹화(MediaRecorder)해 새 파일로 저장합니다. 그래서 구간 길이만큼 시간이 걸리고, 다시 압축하므로 화질이 원본보다 조금 떨어질 수 있습니다. 크롬·엣지에서는 보통 WebM, 일부 브라우저에서는 MP4로 저장됩니다.
           </p>
         </div>
 
         <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">핵심 산출 공식 (Formula & Video Spec)</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">길이와 걸리는 시간</div>
           <div class="text-sm sm:text-base font-extrabold text-slate-900 font-mono leading-relaxed">
-            클립 재생 시간 = 종료 타임스탬프(초) - 시작 타임스탬프(초) | 숏폼 권장 길이: 유튜브 쇼츠 <60초, 릴스 15~30초
+            클립 길이 = 종료 시각(초) − 시작 시각(초) | 저장에 걸리는 시간 ≈ 클립 길이
           </div>
         </div>
 
         <div class="p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-          <div class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">💡 실전 계산 사례 (Case Study)</div>
+          <div class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">💡 계산 예</div>
           <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-            예를 들어, 10분짜리 브이로그 영상 원본에서 가장 재미있는 하이라이트 구간(02:15 ~ 02:45)의 30초 클립을 선택하면 서버 업로드 대기 시간 없이 브라우저 메모리에서 1초 만에 분할되어 인스타그램 릴스 규격으로 즉시 저장됩니다.
+            예를 들어, 10분짜리 브이로그에서 02:15~02:45 구간을 고르면 클립 길이는 30초이고, 녹화해 저장하기까지 약 30초가 걸립니다. 화면 비율은 바뀌지 않으므로 세로 영상이 필요하면 원본이 세로여야 합니다.
           </p>
         </div>
 
         <div class="space-y-3">
           <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2"><span>❓</span> 자주 묻는 질문 (FAQ)</h4>
           
-    <!-- 심층 가이드북 바로가기 (4-1-4 헌법 준수) -->
-    <div class="mt-8 mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>
-        <span class="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full mb-2">2026 실무 가이드</span>
-        <h3 class="text-lg font-bold text-gray-900">공식 기준과 상세 산식이 궁금하신가요?</h3>
-        <p class="text-xs text-gray-600 mt-1">워터마크 없는 비디오 컷편집기의 최신 법정 고시, 감면 혜택, 실무 체크리스트를 확인해보세요.</p>
-      </div>
-      <a href="/guides/guide.html" class="whitespace-nowrap px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition flex items-center gap-2 text-xs shrink-0">
-        심층 가이드북 읽기 &rarr;
-      </a>
-    </div>
 
     <details class="group border border-slate-200 rounded-xl p-4">
             <summary class="flex items-center justify-between cursor-pointer font-bold text-sm text-slate-800">
@@ -284,7 +273,7 @@
               <span class="transition group-open:rotate-180 text-slate-400 text-xs">▼</span>
             </summary>
             <div class="text-xs text-slate-600 mt-3 leading-relaxed border-t border-slate-100 pt-3">
-              아닙니다. HTML5 File API 및 Canvas 비디오 프레임 추출 기술을 통해 영상 파일이 사용자의 컴퓨터/스마트폰 메모리 내에서만 로컬 연산되므로 100% 안전합니다.
+              아니요. 고른 파일은 이 브라우저 안에서 재생하면서 지정한 구간을 녹화(MediaRecorder)해 새 파일을 만들 뿐, 서버로 올리지 않습니다.
             </div>
           </details>
           <details class="group border border-slate-200 rounded-xl p-4">
@@ -293,7 +282,7 @@
               <span class="transition group-open:rotate-180 text-slate-400 text-xs">▼</span>
             </summary>
             <div class="text-xs text-slate-600 mt-3 leading-relaxed border-t border-slate-100 pt-3">
-              붙지 않습니다. CapCut이나 기성 무료 편집 앱과 달리 워터마크가 전혀 삽입되지 않은 원본 그대로의 깔끔한 클립을 무료로 추출할 수 있습니다.
+              붙지 않습니다. 다만 구간을 다시 녹화해 만드는 방식이라 화질과 파일 형식(보통 WebM)은 원본과 다를 수 있습니다.
             </div>
           </details>
           <details class="group border border-slate-200 rounded-xl p-4">
@@ -302,7 +291,7 @@
               <span class="transition group-open:rotate-180 text-slate-400 text-xs">▼</span>
             </summary>
             <div class="text-xs text-slate-600 mt-3 leading-relaxed border-t border-slate-100 pt-3">
-              네, 시작 시간과 종료 시간을 초 단위로 정밀하게 슬라이더로 조절하여 15초, 30초, 60초 등 숏폼 규격에 딱 맞춰 자를 수 있습니다.
+              네. 시작·종료 슬라이더를 0.1초 단위로 움직여 길이를 맞출 수 있습니다. 서비스마다 최대 길이가 다르고 자주 바뀌니 올리기 전에 확인하세요. 화면 비율은 바꾸지 않습니다.
             </div>
           </details>
         </div>
@@ -313,7 +302,7 @@
           </h4>
           <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
             <li class="flex items-start gap-2"><span class="text-red-600 font-bold">✓</span><span>숏폼 영상은 첫 3초 이내에 시선을 끄는 구간을 시작점으로 설정하세요.</span></li>
-            <li class="flex items-start gap-2"><span class="text-red-600 font-bold">✓</span><span>유튜브 쇼츠 규격(최대 60초)을 초과하지 않도록 상단 표시 시간을 확인하세요.</span></li>
+            <li class="flex items-start gap-2"><span class="text-red-600 font-bold">✓</span><span>올릴 서비스의 최대 길이를 확인하고, 위쪽의 '선택된 클립 길이'와 비교하세요.</span></li>
             <li class="flex items-start gap-2"><span class="text-red-600 font-bold">✓</span><span>대용량 4K 영상 편집 시 기기 메모리 여유 공간을 확보하고 브라우저 탭을 정리하세요.</span></li>
           </ul>
         </div>
@@ -347,7 +336,7 @@ class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; mar
                 <span>·</span>
                 <a class="hover:text-red-600 transition" href="/terms.html">이용약관</a>
             </div>
-            <p>100% 무서버 클라이언트 사이드 연산 | 데이터 외부 전송 제로 보증</p>
+            <p>선택한 영상은 이 브라우저 안에서만 처리하고 서버로 보내지 않습니다.</p>
             <p class="text-[11px] text-slate-400">© 2026 Video Cutter. All rights reserved.</p>
         </div>
     </footer>
